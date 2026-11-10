@@ -1,4 +1,4 @@
-const CACHE_NAME = 'finance-vault-pwa-v1';
+const CACHE_NAME = 'finance-vault-pwa-v2';
 const ASSETS = [
   './',
   './index.html',
@@ -30,4 +30,11 @@ self.addEventListener('fetch', (event) => {
       return cachedResponse || fetch(event.request);
     })
   );
+});
+
+// Listens for the immediate update trigger from index.html
+self.addEventListener('message', (event) => {
+  if (event.data === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
 });
